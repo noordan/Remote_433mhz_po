@@ -1,0 +1,7 @@
+[Unit]
+Description = Server for remote controlled power outlets
+After = network.target
+[Service]
+ExecStart = "python3 /var/www/html/light_control.py"
+[Install]
+WantedBy = multi-user.target
