@@ -1,4 +1,4 @@
-# Remote Poweroutlet GUI
+# Remote 433mhz Poweroutlet
 Controll your 433mhz power outlets via raspberry pi/homepage.
 
 A guide for "how to" decode your 433mhz sensor will be published later.
