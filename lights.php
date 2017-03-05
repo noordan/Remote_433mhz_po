@@ -1,5 +1,7 @@
 <?php // TODO: Implement support for schedule
       //       Implement support for turn on/off all lights with one click
+      //       Implement some logging solutions
+      //       Implement a gui for edit codes
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -27,7 +29,7 @@
         var success=getParam("id");
         if(success!=0){
           setTimeout(function() { //rredirect to index.php, remove index.php?logged_in=true
-            window.location.replace("./index.php").delay(5100);
+            window.location.replace("./lights.php").delay(5100);
           }, 3000);
         }
       });
