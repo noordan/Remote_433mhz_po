@@ -1,7 +1,10 @@
+<?php // TODO: Implement support for schedule
+      //       Implement support for turn on/off all lights with one click
+?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>Ligths control</title>
+    <title>Remote ligth control</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -29,7 +32,6 @@
         }
       });
     </script>
-
   </head>
   <body>
     <div class="container">
@@ -43,8 +45,8 @@
             include './codes.php';
             foreach ($signals as $signal) {
               echo '<p class="h4">' . $signal['name']. '</p>';
-              echo '<a href="?id='. $signal['on']. '"><button class="btn btn-custom btn-lg btn-block btn-on" type="submit">Slå på ' . $signal['place'] . '</button></a>';
-              echo '<a href="?id='. $signal['off']. '"><button class="btn btn-custom btn-lg btn-block btn-off" type="submit">Slå av ' . $signal['place'] . '</button></a>';
+              echo '<a href="?id='. $signal['on']. '"><button class="btn btn-custom btn-lg btn-block btn-on" type="submit">Turn on ' . $signal['place'] . '</button></a>';
+              echo '<a href="?id='. $signal['off']. '"><button class="btn btn-custom btn-lg btn-block btn-off" type="submit">Turn off ' . $signal['place'] . '</button></a>';
             }
             if (isset($_GET['id'])) {
               exec('python3 send_code.py ' . $_GET['id']);
