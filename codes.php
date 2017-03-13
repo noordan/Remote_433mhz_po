@@ -16,7 +16,7 @@
                'name' => 'Group3',
                'on' => '4527445',
                'off' => '4527444',
-               'place' => 'Lobby'
+               'place' => 'Hall'
              )
               );
 ?>

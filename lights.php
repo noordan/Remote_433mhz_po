@@ -2,6 +2,15 @@
       //       Implement support for turn on/off all lights with one click
       //       Implement some logging solutions
       //       Implement a gui for edit codes
+
+      include 'functions.php';
+      $ip = get_client_ip_env();
+      session_start();
+      if (preg_match('/192\.168\.0\..{1,3}/', $ip) || isset($_SESSION['username'])){
+
+      } else {
+        require "login/login_header.php";
+      }
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -28,8 +37,8 @@
       $(document).ready(function(){
         var success=getParam("id");
         if(success!=0){
-          setTimeout(function() { //rredirect to index.php, remove index.php?logged_in=true
-            window.location.replace("./lights.php").delay(5100);
+          setTimeout(function() { //rredirect to lights.php
+            window.location.replace("/").delay(5100);
           }, 3000);
         }
       });
@@ -51,7 +60,7 @@
               echo '<a href="?id='. $signal['off']. '"><button class="btn btn-custom btn-lg btn-block btn-off" type="submit">Turn off ' . $signal['place'] . '</button></a>';
             }
             if (isset($_GET['id'])) {
-              exec('python3 send_code.py ' . $_GET['id']);
+              exec('python3 backend/send_code.py ' . $_GET['id']);
             }
           ?>
         </div>
