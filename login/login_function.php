@@ -95,7 +95,7 @@ if (isset($_POST['submit']))
     // session OK, redirect to home page
     if (isset($_SESSION['foo']))
     {
-        header('Location: https://lights.tastorp.nu');
+        header('location: https://' . $_SERVER['HTTP_HOST']);
         exit();
     }
 

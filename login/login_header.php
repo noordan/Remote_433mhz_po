@@ -7,6 +7,8 @@
 
   include '../functions.php';
   $ip = get_client_ip_env();
-  if (!isset($_SESSION['username']) || preg_match('/192\.168\.0\..{1,3}/', $ip)) {
+  if (preg_match('/192\.168\.0\..{1,3}/', $ip)){
+    header('location: https://' . $_SERVER['HTTP_HOST']);
+  } elseif (!isset($_SESSION['username'])) {
       header('location: https://' . $_SERVER['HTTP_HOST'] . '/login/login.php');
   }
