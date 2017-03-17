@@ -53,12 +53,16 @@
       <div class="panel panel-default">
         <div class="panel-body">
           <?php
-            include './codes.php';
+            $signals = array();
+            $signals = fetch_csv();
             foreach ($signals as $signal) {
-              echo '<p class="h4">' . $signal['name']. '</p>';
-              echo '<a href="?id='. $signal['on']. '"><button class="btn btn-custom btn-lg btn-block btn-on" type="submit">Turn on ' . $signal['place'] . '</button></a>';
-              echo '<a href="?id='. $signal['off']. '"><button class="btn btn-custom btn-lg btn-block btn-off" type="submit">Turn off ' . $signal['place'] . '</button></a>';
+              if ($signal['name'] != "name"){
+                echo '<p class="h4">' . $signal['name']. '</p>';
+                echo '<a href="?id='. $signal['on_code']. '"><button class="btn btn-custom btn-lg btn-block btn-on" style="border-color:#B2B2B2; type="submit">Turn on ' . $signal['place'] . '</button></a>';
+                echo '<a href="?id='. $signal['off_code']. '"><button class="btn btn-custom btn-lg btn-block btn-off" style="border-color:#B2B2B2; type="submit">Turn off ' . $signal['place'] . '</button></a>';
+              }
             }
+            echo '<a href="./edit.php"><button class="btn btn-custom btn-lg btn-block btn-off" style="border-color:#B2B2B2;" type="submit">Add or edit sockets </button></a>';
             if (isset($_GET['id'])) {
               exec('python3 backend/send_code.py ' . $_GET['id']);
             }
