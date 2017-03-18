@@ -1,3 +1,13 @@
+<?php
+      include 'functions.php';
+      $ip = get_client_ip_env();
+      session_start();
+      if (preg_match('/192\.168\.0\..{1,3}/', $ip) || isset($_SESSION['username'])){
+
+      } else {
+        require "login/login_header.php";
+      }
+?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -17,7 +27,6 @@
       <div class="text-center">
         <?php
           // fetch csv file
-          require_once 'functions.php';
           $signals = fetch_csv();
 
           if (!isset($_GET['id'])){
