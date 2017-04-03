@@ -62,13 +62,11 @@
                 echo '<b>On time:</b> ' . $signal['on_time']. ' ';
                 echo '<b>Off time:</b> ' . $signal['off_time'] .' ';
                 echo '<b>Status:</b> ' . $signal['status']. ' <br>';
-                echo '<div class="btn-group" role="group" aria-label="...">
-                  <a href="?code='. $signal['on_code'] . '&name=' .  $signal['name'] . '&status=on"><button type="button" class="btn btn-custom" style="border-color:#B2B2B2; type="submit">Turn on ' . $signal['place'] . '</button></a>
-                  <a href="?code='. $signal['off_code'] . '&name=' . $signal['name'] . '&status=off"><button type="button" class="btn btn-custom" style="border-color:#B2B2B2; type="submit">Turn off ' . $signal['place'] . '</button></a>
+                echo '<div align="center">
+                  <a href="?code='. $signal['on_code'] . '&name=' .  $signal['name'] . '&status=on"><button  class="btn btn-md btn-custom" aria-haspopup="true" aria-expanded="false" style="border-color:#B2B2B2;width:49.5%;margin-top:10px;" type="submit">Turn on ' . $signal['place'] . '</button></a>
+                  <a href="?code='. $signal['off_code'] . '&name=' . $signal['name'] . '&status=off"><button  class="btn btn-md btn-custom" aria-haspopup="true" aria-expanded="false" style="border-color:#B2B2B2;width:49.5%;margin-top:10px;" type="submit">Turn off ' . $signal['place'] . '</button></a>
                 </div>';
-                  //echo '<a href="?code='. $signal['on_code'] . '&name=' .  $signal['name'] . '&status=on"><button class="btn btn-custom btn-md btn-on" style="border-color:#B2B2B2; type="submit">Turn on ' . $signal['place'] . '</button></a>';
-                  //echo '<a href="?code='. $signal['off_code'] . '&name=' . $signal['name'] . '&status=off"><button class="btn btn-custom btn-md btn-off" style="border-color:#B2B2B2; type="submit">Turn off ' . $signal['place'] . '</button></a>';
-                echo '<a href="?id=' . $signal['name'] . '"><input class="btn btn-custom btn-lg btn-block btn-edit" style="border-color:#B2B2B2;" type="button" value="Edit"></a>';
+                echo '<a href="?id=' . $signal['name'] . '"><input class="btn btn-custom btn-lg btn-block" style="border-color:#B2B2B2;margin-top:5px;" type="button" value="Edit"></a>';
                 echo '</div>
                 </div>';
               }
