@@ -1,6 +1,6 @@
 <?php
 session_start();
-if (isset($_SESSION['username']) || preg_match('/192\.168\.0\..{1,3}/', $ip) {
+if (isset($_SESSION['username'])) {
     header("location: ../lights.php");
 }
 ?>
