@@ -19,23 +19,39 @@ def current_time():
     gmt_minute = '{:%M}'.format(gmt)
     return gmt_hour, gmt_minute
 
-def fetch_csv():
+def fetch_csv(codes_csv):
     import csv
     outlets = []
-    codes_csv = '/var/www/html/Remote_po_gui/codes.csv' # Csv file in absolute search path
     with open(codes_csv, newline='',) as csvfile:
         codereader = csv.DictReader(csvfile, delimiter=',')
         for row in codereader:
             outlets.append(row)
     return outlets
 
+def update_status(codes_csv, name, status):
+    import csv
+    outlets = fetch_csv(codes_csv)
+    for outlet in outlets:
+        if outlet['name'] == name:
+            outlet['status'] = status
+    print(outlets)
+    with open(codes_csv, 'w', newline='') as csvfile:
+        fieldnames = ['name', 'on', 'off', 'place', 'on_time', 'off_time', 'status']
+        writer = csv.DictWriter(csvfile, delimiter=',', fieldnames=fieldnames)
+        writer.writeheader()
+        for outlet in outlets:
+            writer.writerow(outlet)
+
+
+
 if __name__ == "__main__":
     import sys
+    codes_csv = '/var/www/html/Remote_po_gui/codes.csv' # Csv file in absolute search path
     # scheduled turn on and turn off
     if (sys.argv[1] == "cron"):
         # Get current time and fetch information from csv file
         hour, minute = current_time()
-        outlets = fetch_csv()
+        outlets = fetch_csv(codes_csv)
         time = hour + ":" + minute
         # Loop thru csv file and turn on/off remote outlets
         for s in outlets:
@@ -48,6 +64,7 @@ if __name__ == "__main__":
                     send(connection, msg) #Send status
                     recive = connection.recv(1024) # Message recived
                     connection.close()
+                update_status(codes_csv, s['name'], "on")
             # Turn off
             off_time = str(s['off_time']).split(';')
             if time in off_time:
@@ -57,6 +74,7 @@ if __name__ == "__main__":
                     send(connection, msg) #Send status
                     recive = connection.recv(1024) # Message recived
                     connection.close()
+                update_status(codes_csv, s['name'], "off")
     # Code from the web interface
     else:
         try:
