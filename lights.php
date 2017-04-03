@@ -15,7 +15,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>Remote ligth control</title>
+    <title>Remote light control</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -47,7 +47,7 @@
   <body>
     <div class="container">
       <ol class="breadcrumb" style="margin-top:1%;">
-        <li><a href="./index.php">Home</a></li>
+        <li><a href="./lights.php">Home</a></li>
         <li class="active">Lights</li>
       </ol>
       <div class="panel panel-default">

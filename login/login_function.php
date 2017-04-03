@@ -71,7 +71,7 @@ if (isset($_POST['submit']))
                     {
                         if (isset($info[$i]['userprincipalname']) AND strtolower($info[$i]['userprincipalname'][0]) == strtolower($user))
                         {
-                            session_start();
+                            
 
 
                             $username = explode('@', $user);
