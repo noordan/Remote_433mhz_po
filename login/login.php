@@ -1,5 +1,7 @@
 <?php
 session_start();
+include '../functions.php';
+$ip = get_client_ip_env()
 if (preg_match('/192\.168\.0\..{1,3}/', $ip) || isset($_SESSION['username'])){
     header("location: ../lights.php");
 }

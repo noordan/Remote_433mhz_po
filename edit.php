@@ -16,6 +16,27 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <link rel="stylesheet" href="./custom.css">
+    <script>
+      function getParam(name, url) {
+        if (!url) {
+          url = window.location.href;
+        }
+        var results = new RegExp('[\\?&]' + name + '=([^&#]*)').exec(url);
+        if (!results) {
+          return 0;
+        }
+        return results[1] || 0;
+      }
+
+      $(document).ready(function(){
+        var success=getParam("code");
+        if(success!=0){
+          setTimeout(function() { //redirect to lights.php
+            window.location.replace("/edit.php").delay(5100);
+          }, 3000);
+        }
+      });
+    </script>
   </head>
   <body>
     <div class="container">
@@ -39,7 +60,14 @@
                 echo '<b>Name:</b> ' . $signal['name']. ' ';
                 echo '<b>Place:</b> ' . $signal['place']. ' ';
                 echo '<b>On time:</b> ' . $signal['on_time']. ' ';
-                echo '<b>Off time:</b> ' . $signal['off_time']. ' <br>';
+                echo '<b>Off time:</b> ' . $signal['off_time'] .' ';
+                echo '<b>Status:</b> ' . $signal['status']. ' <br>';
+                echo '<div class="btn-group" role="group" aria-label="...">
+                  <a href="?code='. $signal['on_code'] . '&name=' .  $signal['name'] . '&status=on"><button type="button" class="btn btn-custom" style="border-color:#B2B2B2; type="submit">Turn on ' . $signal['place'] . '</button></a>
+                  <a href="?code='. $signal['off_code'] . '&name=' . $signal['name'] . '&status=off"><button type="button" class="btn btn-custom" style="border-color:#B2B2B2; type="submit">Turn off ' . $signal['place'] . '</button></a>
+                </div>';
+                  //echo '<a href="?code='. $signal['on_code'] . '&name=' .  $signal['name'] . '&status=on"><button class="btn btn-custom btn-md btn-on" style="border-color:#B2B2B2; type="submit">Turn on ' . $signal['place'] . '</button></a>';
+                  //echo '<a href="?code='. $signal['off_code'] . '&name=' . $signal['name'] . '&status=off"><button class="btn btn-custom btn-md btn-off" style="border-color:#B2B2B2; type="submit">Turn off ' . $signal['place'] . '</button></a>';
                 echo '<a href="?id=' . $signal['name'] . '"><input class="btn btn-custom btn-lg btn-block btn-edit" style="border-color:#B2B2B2;" type="button" value="Edit"></a>';
                 echo '</div>
                 </div>';
@@ -97,6 +125,13 @@
                 }
               }
             }
+          }
+          // Run codes for remote sockets
+          if (isset($_GET['code'])) {
+            exec('python3 backend/send_code.py ' . $_GET['code']);
+
+            // Call function for update status
+            status($_GET['name'], $_GET['status']);
           }
         ?>
       </div>

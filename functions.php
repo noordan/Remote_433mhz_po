@@ -18,6 +18,8 @@
           $ipaddress = 'UNKNOWN';
       return $ipaddress;
   }
+
+  // Fetch data in csv file
   function fetch_csv(){
     $signals = array();
     $signal = array();
@@ -29,7 +31,7 @@
           $signal['place'] = $data[3];
           $signal['on_time'] = $data[4];
           $signal['off_time'] = $data[5];
-          $signal['status'] = $data[6]
+          $signal['status'] = $data[6];
           array_push($signals, $signal);
         }
         fclose($handle);
@@ -40,6 +42,7 @@
     }
   }
 
+  // combined row for csv file
   function combined_string($signal){
     $row = "";
     $first = True;
@@ -55,11 +58,10 @@
     return $row;
   }
 
+  // print out data to csv
   function update_csv(){
     $signals = fetch_csv();
     $csv = fopen("codes.csv", "w") or die("Unable to open file!");
-    $csv_header = "name,on,off,place,on_time,off_time";
-    #fwrite($csv, $csv_header);
     foreach ($signals as $key => $signal) {
       if ($signal['name'] == $_POST['name']) {
         $signal['name'] = $_POST['name'];
@@ -76,6 +78,7 @@
     fclose($csv);
   }
 
+  // Add a new socket
   function add_remote_outlet(){
     $add_socket = array();
     $add_socket[0] = $_POST['name'];
@@ -84,22 +87,34 @@
     $add_socket[3] = $_POST['place'];
     $add_socket[4] = $_POST['on_time'];
     $add_socket[5] = $_POST['off_time'];
-    $add_socket[6] = "off"
+    $add_socket[6] = "off";
     $row = combined_string($add_socket);
     $csv = fopen("codes.csv", "a") or die("Unable to open file!");
     fwrite($csv, $row);
     fclose($csv);
   }
 
+  // Update status in csv file
+  function status($name, $status){
+    $signals = fetch_csv();
+    $csv = fopen("codes.csv", "w") or die("Unable to open file!");
+    foreach ($signals as $key => $signal) {
+      if ($signal['name'] == $name) {
+        $signal['status'] = $status;
+      }
+      $row = combined_string($signal);
+      fwrite($csv, $row);
+    }
+    fclose($csv);
+
+  }
+
+  // Call edit or add function
   if (isset($_POST['edit'])){
     update_csv();
     header('location: https://' . $_SERVER['HTTP_HOST'] . '/edit.php');
   } elseif (isset($_POST['add'])){
     add_remote_outlet();
     header('location: https://' . $_SERVER['HTTP_HOST'] . '/edit.php');
-  }
-
-  function check_status(){
-
   }
 ?>
