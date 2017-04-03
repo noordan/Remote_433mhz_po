@@ -1,4 +1,4 @@
-name,on,off,place,on_time,off_time
-Group1,1381717,1381716,Kitchen,09:00,19:00
-Group2,1394005,1394004,Bedroom,09:00,19:00
-Group3,4527445,4527444,Hall,09:00,19:00
+name,on,off,place,on_time,off_time,status
+Group1,1381717,1381716,Kitchen,09:00,19:00,on
+Group2,1394005,1394004,Bedroom,09:00,19:00,off
+Group3,4527445,4527444,Hall,09:00,19:00,on

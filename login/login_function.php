@@ -1,10 +1,7 @@
 <?php require 'login_header.php';?>
 <?php
 // TODO: check if user exists in mail db, if not add user to it, fix page to add alias
-//INSERT INTO Domains_tbl (DomainName) VALUES ('linuxnewz.com');
-//INSERT INTO Users_tbl (DomainId, password, Email) VALUES (1, ENCRYPT('PasswordForFirstEmailAccount', CONCAT('$6$', SUBSTRING(SHA(RAND()), -16))), 'tecmint@linuxnewz.com');
-//INSERT INTO Users_tbl (DomainId, password, Email) VALUES (1, ENCRYPT('PasswordForSecondEmailAccount', CONCAT('$6$', SUBSTRING(SHA(RAND()), -16))), 'linuxsay@linuxnewz.com');
-//INSERT INTO Alias_tbl (DomainId, Source, Destination) VALUES (1, 'info@linuxnewz.com', 'tecmint@linuxnewz.com');
+
 
 error_reporting(E_ALL);
 ini_set('display_errors', 'On');

@@ -29,6 +29,7 @@
           $signal['place'] = $data[3];
           $signal['on_time'] = $data[4];
           $signal['off_time'] = $data[5];
+          $signal['status'] = $data[6]
           array_push($signals, $signal);
         }
         fclose($handle);
@@ -67,6 +68,7 @@
         $signal['place'] = $_POST['place'];
         $signal['on_time'] = $_POST['on_time'];
         $signal['off_time'] = $_POST['off_time'];
+        $signal['status'] = $signal['status'];
       }
       $row = combined_string($signal);
       fwrite($csv, $row);
@@ -82,6 +84,7 @@
     $add_socket[3] = $_POST['place'];
     $add_socket[4] = $_POST['on_time'];
     $add_socket[5] = $_POST['off_time'];
+    $add_socket[6] = "off"
     $row = combined_string($add_socket);
     $csv = fopen("codes.csv", "a") or die("Unable to open file!");
     fwrite($csv, $row);
@@ -94,5 +97,9 @@
   } elseif (isset($_POST['add'])){
     add_remote_outlet();
     header('location: https://' . $_SERVER['HTTP_HOST'] . '/edit.php');
+  }
+
+  function check_status(){
+
   }
 ?>
