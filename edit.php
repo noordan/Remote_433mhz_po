@@ -22,6 +22,7 @@
       <ol class="breadcrumb" style="margin-top:1%;">
         <li><a href="./index.php">Home</a></li>
         <li><a href="./lights.php">Lights</a></li>
+        <li><a href="login/logout.php">Logout</a></li>
         <li class="active">Edit</li>
       </ol>
       <div class="text-center">

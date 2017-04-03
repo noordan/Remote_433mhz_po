@@ -49,6 +49,7 @@
       <ol class="breadcrumb" style="margin-top:1%;">
         <li><a href="./lights.php">Home</a></li>
         <li class="active">Lights</li>
+        <li><a href="login/logout.php">Logout</a></li>
       </ol>
       <div class="panel panel-default">
         <div class="panel-body">
