@@ -34,7 +34,6 @@ def update_status(codes_csv, name, status):
     for outlet in outlets:
         if outlet['name'] == name:
             outlet['status'] = status
-    print(outlets)
     with open(codes_csv, 'w', newline='') as csvfile:
         fieldnames = ['name', 'on', 'off', 'place', 'on_time', 'off_time', 'status']
         writer = csv.DictWriter(csvfile, delimiter=',', fieldnames=fieldnames)
