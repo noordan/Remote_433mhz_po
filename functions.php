@@ -109,6 +109,15 @@
 
   }
 
+  function check_schedule(){
+    $cron = exec("crontab -l");
+    $scheduled = "False";
+    if (preg_match('/\*\/5 \* \* \* \* .*backend\/send_code.py cron/', $cron)) {
+      $scheduled = "True";
+    }
+    return $scheduled;
+  }
+
   // Call edit or add function
   if (isset($_POST['edit'])){
     update_csv();
