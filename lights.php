@@ -76,7 +76,7 @@
       </div>
       <div class="panel panel-default">
         <div class="panel-body">
-          <a href="./edit.php"><button class="btn btn-custom btn-lg btn-block" style="border-color:#B2B2B2;" type="submit"> Add or edit sockets </button></a>
+          <a href="./edit.php"><button class="btn btn-custom btn-lg btn-block btn-off" style="border-color:#B2B2B2;" type="submit"> Add or edit sockets </button></a>
           <a href="./settings.php"><button class="btn btn-custom btn-lg btn-block" style="border-color:#B2B2B2;" type="submit"> Settings </button></a>
         </div>
       </div>
