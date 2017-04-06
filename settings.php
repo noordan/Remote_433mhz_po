@@ -30,16 +30,26 @@
         <div class="panel-body">
           <p class="h4">Scheduled backup</p>
           <?php
-            $scheduled = check_schedule();
+            $scheduled = scheduling("check");
             if ($scheduled == "True"){
-              echo "Your sockets is already scheduled every 5 min";
+              echo '<div class="alert alert-success" role="success">';
+              echo "<b><Success! </b>Your sockets is already scheduled every 5 min";
+              echo '</div>';
+              echo '<a href="?scheduling=disable"><button class="btn btn-custom btn-lg btn-block" style="border-color:#B2B2B2;" type="submit">Disable scheduling</button></a>';
             } elseif ($scheduled == "False") {
-              echo "Your sockets is not scheduled";
+              echo '<div class="alert alert-info" role="alert">';
+              echo "<b>Information! </b>Your sockets is not scheduled. Try to enable scheduling.";
+              echo '</div>';
+              echo '<a href="?scheduling=enable"><button class="btn btn-custom btn-lg btn-block" style="border-color:#B2B2B2;" type="submit">Enable scheduling</button></a>';
+            }
+
+
+            if (isset($_GET['scheduling']) && $_GET['scheduling'] == "enable") {
+              scheduling("enable");
             }
           ?>
         </div>
       </div>
-
     </div>
   </body>
 </html>

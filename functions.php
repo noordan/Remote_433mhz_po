@@ -109,13 +109,39 @@
 
   }
 
-  function check_schedule(){
+  function scheduling($action){
+
     $cron = exec("crontab -l");
     $scheduled = "False";
-    if (preg_match('/\*\/5 \* \* \* \* .*backend\/send_code.py cron/', $cron)) {
-      $scheduled = "True";
+    $cron_work = "*/5 * * * * python3 ";
+    if ($action == "check"){
+      if (preg_match('/\*\/5 \* \* \* \* .*backend\/send_code.py cron/', $cron)) {
+        $scheduled = "True";
+      }
+      return $scheduled;
     }
-    return $scheduled;
+
+    elseif ($action == "enable") {
+
+      // Check if cron already exists
+      if (preg_match('/\*\/5 \* \* \* \* .*backend\/send_code.py cron/', $cron)){
+        # Do nothing, already exists in crontab
+      } else {
+        // list existing cronjobs and add socket scheduling
+        exec("crontab -l > /tmp/cron");
+        $pwd = exec("pwd");
+        $pwd = $pwd . "/backend/send_code.py cron";
+        $cron_work = $cron_work . $pwd;
+        exec("echo \"" . $cron_work . "\" >> /tmp/cron");
+        // put the crontab in web users crontab
+        exec("/usr/bin/crontab /tmp/cron");
+        exec("rm /tmp/cron");
+      }
+
+    }
+    elseif ($action == "disable") {
+      # code...
+    }
   }
 
   // Call edit or add function
