@@ -1,6 +1,6 @@
 <?php // TODO: Implement support for turn on/off all lights with one click
       //       Implement some logging solutions
-
+      //       Add sun up/down feature
       include 'functions.php';
       $ip = get_client_ip_env();
       session_start();

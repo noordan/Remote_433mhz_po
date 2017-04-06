@@ -18,6 +18,27 @@
     <link rel="stylesheet" href="./custom.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <!-- Reload page if a setting has been done -->
+    <script>
+      function getParam(name, url) {
+        if (!url) {
+          url = window.location.href;
+        }
+        var results = new RegExp('[\\?&]' + name + '=([^&#]*)').exec(url);
+        if (!results) {
+          return 0;
+        }
+        return results[1] || 0;
+      }
+      $(document).ready(function(){
+        var success=getParam("scheduling");
+        if(success!=0){
+          setTimeout(function() { //rredirect to lights.php
+            window.location.replace("/settings.php").delay(5100);
+          }, 3000);
+        }
+      });
+    </script>
   </head>
   <body>
     <div class="container">
@@ -46,7 +67,12 @@
           ?>
         </div>
         <div class="panel-body">
-        </div>      
+          <p class="h4">Raspberry pi settings</p>
+            <?php
+              $configs = include('config.php');
+              echo json_encode($configs->ip_info['ip']);
+            ?>
+        </div>
       </div>
       <?php
         if (isset($_GET['scheduling']) && $_GET['scheduling'] == "enable") {
