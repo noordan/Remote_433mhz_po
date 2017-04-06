@@ -110,37 +110,37 @@
   }
 
   function scheduling($action){
-
+    // List current cronjobs in $cron
     $cron = exec("crontab -l");
-    $scheduled = "False";
-    $cron_work = "*/5 * * * * python3 ";
+    // Define cronjob
+    $cronjob = "*/5 * * * * python3 " . getcwd() . "/backend/send_code.py cron";
+
     if ($action == "check"){
+      $scheduled = "False";
+      // Return true
       if (preg_match('/\*\/5 \* \* \* \* .*backend\/send_code.py cron/', $cron)) {
         $scheduled = "True";
       }
+      // Return true or false
       return $scheduled;
-    }
+    // Check if the sockets have been scheduled
 
-    elseif ($action == "enable") {
-
+    } elseif ($action == "enable") {
       // Check if cron already exists
       if (preg_match('/\*\/5 \* \* \* \* .*backend\/send_code.py cron/', $cron)){
         # Do nothing, already exists in crontab
       } else {
         // list existing cronjobs and add socket scheduling
         exec("crontab -l > /tmp/cron");
-        $pwd = exec("pwd");
-        $pwd = $pwd . "/backend/send_code.py cron";
-        $cron_work = $cron_work . $pwd;
-        exec("echo \"" . $cron_work . "\" >> /tmp/cron");
-        // put the crontab in web users crontab
+        exec("echo \"" . $cronjob . "\" >> /tmp/cron");
+        // append the new crontab scheduling in web-users crontab
         exec("/usr/bin/crontab /tmp/cron");
         exec("rm /tmp/cron");
       }
 
-    }
-    elseif ($action == "disable") {
-      # code...
+    } elseif ($action == "disable") {
+        //remove crontab from www-data
+        exec("/usr/bin/crontab -r", $cronjob);
     }
   }
 

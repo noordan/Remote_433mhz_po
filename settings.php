@@ -23,6 +23,7 @@
     <div class="container">
       <ol class="breadcrumb" style="margin-top:1%;">
         <li><a href="./lights.php">Home</a></li>
+        <li><a href="./lights.php">Lights</a></li>
         <li class="active">Settings</li>
         <li><a href="login/logout.php">Log out</a></li>
       </ol>
@@ -32,24 +33,29 @@
           <?php
             $scheduled = scheduling("check");
             if ($scheduled == "True"){
-              echo '<div class="alert alert-success" role="success">';
-              echo "<b><Success! </b>Your sockets is already scheduled every 5 min";
+              echo '<div class="alert alert-success" role="alert">';
+              echo "<strong>Success! </strong>Your sockets is already scheduled every 5 min";
               echo '</div>';
               echo '<a href="?scheduling=disable"><button class="btn btn-custom btn-lg btn-block" style="border-color:#B2B2B2;" type="submit">Disable scheduling</button></a>';
             } elseif ($scheduled == "False") {
               echo '<div class="alert alert-info" role="alert">';
-              echo "<b>Information! </b>Your sockets is not scheduled. Try to enable scheduling.";
+              echo "<strong>Information! </strong>Your sockets is not scheduled. Try to enable scheduling.";
               echo '</div>';
               echo '<a href="?scheduling=enable"><button class="btn btn-custom btn-lg btn-block" style="border-color:#B2B2B2;" type="submit">Enable scheduling</button></a>';
             }
-
-
-            if (isset($_GET['scheduling']) && $_GET['scheduling'] == "enable") {
-              scheduling("enable");
-            }
           ?>
         </div>
+        <div class="panel-body">
+        </div>      
       </div>
+      <?php
+        if (isset($_GET['scheduling']) && $_GET['scheduling'] == "enable") {
+          scheduling("enable");
+        } elseif (isset($_GET['scheduling']) && $_GET['scheduling'] == "disable") {
+          $line = scheduling("disable");
+          echo $line;
+        }
+      ?>
     </div>
   </body>
 </html>
