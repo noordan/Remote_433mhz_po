@@ -35,7 +35,7 @@
         if(success!=0){
           setTimeout(function() { //rredirect to lights.php
             window.location.replace("/settings.php").delay(5100);
-          }, 3000);
+          }, 0300);
         }
       });
     </script>
@@ -49,29 +49,25 @@
         <li><a href="login/logout.php">Log out</a></li>
       </ol>
       <div class="panel panel-default">
-        <div class="panel-body">
-          <p class="h4">Scheduled backup</p>
-          <?php
-            $scheduled = scheduling("check");
-            if ($scheduled == "True"){
-              echo '<div class="alert alert-success" role="alert">';
-              echo "<strong>Success! </strong>Your sockets is already scheduled every 5 min";
-              echo '</div>';
-              echo '<a href="?scheduling=disable"><button class="btn btn-custom btn-lg btn-block" style="border-color:#B2B2B2;" type="submit">Disable scheduling</button></a>';
-            } elseif ($scheduled == "False") {
-              echo '<div class="alert alert-info" role="alert">';
-              echo "<strong>Information! </strong>Your sockets is not scheduled. Try to enable scheduling.";
-              echo '</div>';
-              echo '<a href="?scheduling=enable"><button class="btn btn-custom btn-lg btn-block" style="border-color:#B2B2B2;" type="submit">Enable scheduling</button></a>';
-            }
-          ?>
-        </div>
+          <?php include 'settings/scheduling.php'; ?>
         <div class="panel-body">
           <p class="h4">Raspberry pi settings</p>
-            <?php
-              $configs = include('config.php');
-              echo json_encode($configs->ip_info['ip']);
-            ?>
+          <label for="basic-url">IP address and port settings</label>
+          <form method="post">
+            <div class="form-group">
+              <?php
+                // Get configuration file
+                $configs = include('config.php');
+                echo '<div class="input-group">';
+                  echo '<span class="input-group-addon" id="basic-addon3">IP - Adress</span>';
+                  echo '<input type="text" value=' . json_encode($configs['socket_info']['ip']) . ' class="form-control" name="ip" aria-describedby="basic-addon3">';
+                  echo '<span class="input-group-addon" style="margin-left:0.5%; id="basic-addon2">Port</span>';
+                  echo '<input type="text" value=' . json_encode($configs['socket_info']['port']) . ' class="form-control" name="port" aria-describedby="basic-addon3">';
+                echo '</div>';
+                echo '<button class="btn btn-custom btn-lg btn-block" style="border-color:#B2B2B2;margin-top:20px;" type="submit" name="update_ip">Update Raspberry Pi settings</button>';
+              ?>
+            </div>
+          </form>
         </div>
       </div>
       <?php
@@ -80,6 +76,12 @@
         } elseif (isset($_GET['scheduling']) && $_GET['scheduling'] == "disable") {
           $line = scheduling("disable");
           echo $line;
+        } elseif (isset($_POST['update_ip'])) {
+          // Change raspberry i settings in configuration file and save it again
+          // Auto refresh is not implemented
+          $configs['socket_info']['ip'] = $_POST['ip'];
+          $configs['socket_info']['port'] = $_POST['port'];
+          file_put_contents('config.php', '<?php return ' . var_export($configs, true) . ';');
         }
       ?>
     </div>

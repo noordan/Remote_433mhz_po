@@ -1,6 +1,8 @@
 <?php // TODO: Implement support for turn on/off all lights with one click
       //       Implement some logging solutions
       //       Add sun up/down feature
+      ini_set("session.cookie_secure", 1);
+      ini_set( 'session.cookie_httponly', 1 );
       include 'functions.php';
       $ip = get_client_ip_env();
       session_start();
@@ -37,7 +39,7 @@
         if(success!=0){
           setTimeout(function() { //rredirect to lights.php
             window.location.replace("/").delay(5100);
-          }, 3000);
+          }, 1000);
         }
       });
     </script>
