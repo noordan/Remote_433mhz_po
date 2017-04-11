@@ -1,12 +1,27 @@
 #!/usr/bin/python3           # This is client.py file
 import socket
+def get_ip():
+    # Get config file
+    import re
+    with open('/var/www/html/Remote_po_gui/config.php', 'r') as f:
+        for line in f:
+            # Scan for ip and port
+            if re.search('\'ip\' => \'(.*)\'', line):
+                ip = re.search('\'ip\' => \'(.*)\'', line).group(1)
+            elif re.search('\'port\' => \'(.*)\'', line):
+                port = int(re.search('\'port\' => \'(.*)\'', line).group(1))
+    # Return socket settings
+    return ip, port
+
 def send(connection, msg):
     connection.sendall(msg.encode('ascii'))
 
 def connect():
-    # create a socket object ad connect to server
+    # get ip
+    ip, port = get_ip()
+    # create a socket object and connect to server
     connection = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-    connection.connect(('192.168.0.121', 9999))
+    connection.connect((ip, port))
 
     recive = connection.recv(1024)
     return connection, recive

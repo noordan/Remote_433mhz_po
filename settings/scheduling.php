@@ -1,7 +1,8 @@
 <?php
-  // if ($_SERVER['REQUEST_URI'] != "https://"){
-  //
-  // }
+  //include '../functions.php';
+  if ($_SERVER['REQUEST_URI'] != '/settings.php'){
+    header('location: https://' . $_SERVER['HTTP_HOST'] . '/settings.php');
+  }
   echo '<div class="panel-body">
     <p class="h4">Scheduled backup</p>';
 
