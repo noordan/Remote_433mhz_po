@@ -15,7 +15,7 @@ def send_code(code):
     process = subprocess.Popen([cmd], shell=True, stdout=subprocess.PIPE)
     out, err = process.communicate()
 def send_nexa(nexa):
-    cmd = "sudo -u pi /home/pi/Remote_433mhz_po/NewRemoteTransmitter/outlet " + nexa
+    cmd = "sudo -u pi /home/pi/Remote_433mhz_po/backend/Nexa/outlet " + nexa
     process = subprocess.Popen([cmd], shell=True, stdout=subprocess.PIPE)
     out, err = process.communicate()
 
