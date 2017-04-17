@@ -1,5 +1,8 @@
 #!/usr/bin/python3           # This is client.py file
 import socket
+def get_suntime():
+    pass
+
 def get_ip():
     # Get config file
     import re
