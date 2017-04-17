@@ -66,7 +66,7 @@
           // Auto refresh is not implemented
           $configs['socket_info']['ip'] = $_POST['ip'];
           $configs['socket_info']['port'] = $_POST['port'];
-          file_put_contents('config.php', '<?php return ' . var_export($configs, true) . ';');
+          file_put_contents('config.php', '<?php return ' . var_export($configs, true) . ';?>');
         }
       ?>
     </div>
