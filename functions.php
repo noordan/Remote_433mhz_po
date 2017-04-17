@@ -144,6 +144,9 @@
     }
   }
 
+  function update_config($configs){
+    file_put_contents('config.php', '<?php return ' . var_export($configs, true) . ';?>');
+  }
   // Call edit or add function
   if (isset($_POST['edit'])){
     update_csv();

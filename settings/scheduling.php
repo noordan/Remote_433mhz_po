@@ -19,4 +19,10 @@
       echo '<a href="?scheduling=enable"><button class="btn btn-custom btn-lg btn-block" style="border-color:#B2B2B2;" type="submit">Enable scheduling</button></a>';
     }
 echo '</div>';
+
+if (isset($_GET['scheduling']) && $_GET['scheduling'] == "enable") {
+  scheduling("enable");
+} elseif (isset($_GET['scheduling']) && $_GET['scheduling'] == "disable") {
+  scheduling("disable");
+}
 ?>

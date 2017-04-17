@@ -31,9 +31,10 @@
         return results[1] || 0;
       }
       $(document).ready(function(){
-        var success=getParam("scheduling");
-        if(success!=0){
-          setTimeout(function() { //rredirect to lights.php
+        var scheduling=getParam("login");
+        var login=getParam("login");
+        if(login!=0){
+          setTimeout(function() { // redirect to settings.php
             window.location.replace("/settings.php").delay(5100);
           }, 0300);
         }
@@ -52,22 +53,12 @@
           <?php
             // include settings
             include 'settings/scheduling.php';
+            include 'settings/login_settings.php';
             include 'settings/raspberrypi.php';
           ?>
       </div>
       <?php
-        if (isset($_GET['scheduling']) && $_GET['scheduling'] == "enable") {
-          scheduling("enable");
-        } elseif (isset($_GET['scheduling']) && $_GET['scheduling'] == "disable") {
-          $line = scheduling("disable");
-          echo $line;
-        } elseif (isset($_POST['update_ip'])) {
-          // Change raspberry i settings in configuration file and save it again
-          // Auto refresh is not implemented
-          $configs['socket_info']['ip'] = $_POST['ip'];
-          $configs['socket_info']['port'] = $_POST['port'];
-          file_put_contents('config.php', '<?php return ' . var_export($configs, true) . ';?>');
-        }
+
       ?>
     </div>
   </body>

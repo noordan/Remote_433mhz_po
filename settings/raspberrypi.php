@@ -16,6 +16,14 @@
           echo '<input type="text" value=' . json_encode($configs['socket_info']['port']) . ' class="form-control" name="port" aria-describedby="basic-addon3">';
         echo '</div>';
         echo '<button class="btn btn-custom btn-lg btn-block" style="border-color:#B2B2B2;margin-top:20px;" type="submit" name="update_ip">Update Raspberry Pi settings</button>';
+
+        if (isset($_POST['update_ip'])) {
+          // Change raspberry i settings in configuration file and save it again
+          // Auto refresh is not implemented
+          $configs['socket_info']['ip'] = $_POST['ip'];
+          $configs['socket_info']['port'] = $_POST['port'];
+          update_config($configs);
+        }
       ?>
     </div>
   </form>
