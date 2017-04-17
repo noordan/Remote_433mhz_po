@@ -5,13 +5,17 @@ def close(clientsocket):
 def bind():
     # create a socket object and bind the port
     serversocket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-    serversocket.bind(('192.168.0.121', 9999))
+    serversocket.bind(('192.168.5.29', 9999))
     # queue up to 5 requests
     serversocket.listen(5)
     return serversocket
 def send_code(code):
     #run RPi_utils to transmit 433mhz signal
     cmd = "sudo -u pi /home/pi/433Utils/RPi_utils/codesend " + code
+    process = subprocess.Popen([cmd], shell=True, stdout=subprocess.PIPE)
+    out, err = process.communicate()
+def send_nexa(nexa):
+    cmd = "sudo -u pi /home/pi/Remote_433mhz_po/NewRemoteTransmitter/outlet " + nexa
     process = subprocess.Popen([cmd], shell=True, stdout=subprocess.PIPE)
     out, err = process.communicate()
 
@@ -34,7 +38,14 @@ if __name__ == "__main__":
                 #if code is recived send to the power outlets
                 if code:
                     print(code)           # debug
-                    for x in range(3):
+                    pattern = re.search("^(\d)[_](\d)", code)
+                    if pattern:
+                       nexa = ((pattern.group(1)) + " " + (pattern.group(2)))
+                       for x in range(3):
+                        print(nexa)
+                        send_nexa(nexa)
+                    else: 
+                       for x in range(3):
                         send_code(code)
                     r = "Message recived"
                     clientsocket.send(r.encode('ascii'))
