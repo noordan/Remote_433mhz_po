@@ -93,7 +93,7 @@
                 echo '<b>Place: </b><input type="text" class="form-control" name="place" Placeholder="Kitchen"> ';
                 echo '<b>On time: </b><input type="text" class="form-control" name="on_time" Placeholder="10:05"> ';
                 echo '<b>Off time: </b><input type="text" class="form-control" name="off_time" Placeholder="20:35"> ';
-                echo '<b>Is dimmable: </b><input type="text" class="form-control" name="dimmable" Placeholder="No"> ';
+                echo '<b>Is dimmable: </b><input type="text" class="form-control" name="dimmable" Placeholder="false"> ';
               echo '</div>
                   <input class="btn btn-custom btn-lg btn-block" type="submit" formaction="functions.php" value="Submit" style="margin-top:10px;">
                 </form>';

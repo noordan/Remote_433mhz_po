@@ -63,6 +63,16 @@
                   echo '<a href="?code='. $signal['on_code'] . '&name=' .  $signal['name'] . '&status=on"><button class="btn btn-custom btn-lg btn-block btn-on" style="border-color:#B2B2B2; type="submit">Turn on ' . $signal['place'] . '</button></a>';
                 } elseif ($signal['status'] == "on"){
                   echo '<a href="?code='. $signal['off_code'] . '&name=' . $signal['name'] . '&status=off"><button class="btn btn-custom btn-lg btn-block btn-off" style="border-color:#B2B2B2; type="submit">Turn off ' . $signal['place'] . '</button></a>';
+                } elseif ($signal['dimmable'] == "true") {
+                  echo 'Current status ' . $signal['status'];
+                  $effect_percent = ((int)$signal['status']/15)*100;
+                  echo '<span class="glyphicon glyphicon-chevron-left"></span>
+                        <div class="progress" style="width:80%">
+                          <div class="progress-bar" role="progressbar" aria-valuenow="' . $effect_percent . '" aria-valuemin="0" aria-valuemax="100" style="width: ' . $effect_percent . '%;">
+                            '. $effect_percent .'%
+                          </div>
+                        </div>
+                        <span class="glyphicon glyphicon-chevron-right"></span>';
                 }
               }
             }
