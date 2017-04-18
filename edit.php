@@ -63,8 +63,8 @@
                 echo '<b>Place:</b> ' . $signal['place']. ' ';
                 echo '<b>On time:</b> ' . $signal['on_time']. ' ';
                 echo '<b>Off time:</b> ' . $signal['off_time'] .' ';
-                echo '<b>Status:</b> ' . $signal['status'];
-                echo '<b>Status:</b> ' . $signal['dimmable'] . ' <br>';
+                echo '<b>Status:</b> ' . $signal['status'] . ' ';
+                echo '<b>Is dimmable:</b> ' . $signal['dimmable'] . ' <br>';
                 echo '<div align="center">
                   <a href="?code='. $signal['on_code'] . '&name=' .  $signal['name'] . '&status=on"><button  class="btn btn-md btn-custom" aria-haspopup="true" aria-expanded="false" style="border-color:#B2B2B2;width:49.5%;margin-top:10px;" type="submit">Turn on ' . $signal['place'] . '</button></a>
                   <a href="?code='. $signal['off_code'] . '&name=' . $signal['name'] . '&status=off"><button  class="btn btn-md btn-custom" aria-haspopup="true" aria-expanded="false" style="border-color:#B2B2B2;width:49.5%;margin-top:10px;" type="submit">Turn off ' . $signal['place'] . '</button></a>
