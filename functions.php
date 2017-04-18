@@ -155,4 +155,5 @@
     add_remote_outlet();
     header('location: https://' . $_SERVER['HTTP_HOST'] . '/edit.php');
   }
+
 ?>

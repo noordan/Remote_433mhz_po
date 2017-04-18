@@ -71,7 +71,7 @@
             }
             // Run codes for remote sockets
             if (isset($_GET['code'])) {
-              exec('python3 backend/send_code.py ' . $_GET['code']);
+              exec('python3 backend/send_code.py ' . $_GET['code'] . ' > /dev/null &');
 
               // Call function for update status
               status($_GET['name'], $_GET['status']);
