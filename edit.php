@@ -1,12 +1,15 @@
 <?php
-      include 'functions.php';
-      $ip = get_client_ip_env();
-      session_start();
-      if (preg_match('/192\.168\.0\..{1,3}/', $ip) || isset($_SESSION['username'])){
+  $configs = include('config.php');
+  include 'functions.php';
+  if ($configs['login_enabled'] == "True"){
+    $ip = get_client_ip_env();
+    session_start();
+    if (preg_match('/192\.168\.0\..{1,3}/', $ip) || isset($_SESSION['username'])){
 
-      } else {
-        require "login/login_header.php";
-      }
+    } else {
+      require "login/login_header.php";
+    }
+  }
 ?>
 <!DOCTYPE html>
 <html lang="en">

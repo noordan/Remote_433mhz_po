@@ -1,12 +1,15 @@
 <?php
-      include 'functions.php';
-      $ip = get_client_ip_env();
-      session_start();
-      if (preg_match('/192\.168\.0\..{1,3}/', $ip) || isset($_SESSION['username'])){
+  $configs = include('config.php');
+  include 'functions.php';
+  if ($configs['login_enabled'] == "True"){
+    $ip = get_client_ip_env();
+    session_start();
+    if (preg_match('/192\.168\.0\..{1,3}/', $ip) || isset($_SESSION['username'])){
 
-      } else {
-        require "login/login_header.php";
-      }
+    } else {
+      require "login/login_header.php";
+    }
+  }
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -31,9 +34,8 @@
         return results[1] || 0;
       }
       $(document).ready(function(){
-        var scheduling=getParam("login");
-        var login=getParam("login");
-        if(login!=0){
+        var success=getParam("scheduling");
+        if(success!=0){
           setTimeout(function() { // redirect to settings.php
             window.location.replace("/settings.php").delay(5100);
           }, 0300);

@@ -5,7 +5,7 @@
       ini_set( 'session.cookie_httponly', 1 );
       $configs = include('config.php');
       include 'functions.php';
-      if ($configs['login_enabled'] == "true"){
+      if ($configs['login_enabled'] == "True"){
         $ip = get_client_ip_env();
         session_start();
         if (preg_match('/192\.168\.0\..{1,3}/', $ip) || isset($_SESSION['username'])){
@@ -41,8 +41,8 @@
         var success=getParam("code");
         if(success!=0){
           setTimeout(function() { //rredirect to lights.php
-            window.location.replace("/").delay(5100);
-          }, 1000);
+            window.location.replace("/").delay(0100);
+          }, 0100);
         }
       });
     </script>
