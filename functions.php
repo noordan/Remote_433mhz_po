@@ -33,6 +33,7 @@
           $signal['off_time'] = $data[5];
           $signal['status'] = $data[6];
           $signal['dimmable'] = $data[7];
+          $signal['dimlevel'] = $data[8];
           array_push($signals, $signal);
         }
         fclose($handle);
@@ -73,6 +74,7 @@
         $signal['off_time'] = $_POST['off_time'];
         $signal['status'] = $signal['status'];
         $signal['dimmable'] = $signal['dimmable'];
+        $signal['dimlevel'] = $signal['dimlevel'];
       }
       $row = combined_string($signal);
       fwrite($csv, $row);
@@ -91,6 +93,13 @@
     $add_socket[5] = $_POST['off_time'];
     $add_socket[6] = "off";
     $add_socket[7] = $_POST['dimmable'];
+
+    // leave column blank if not dimmable
+    if ($_POST['dimmable'] == "false"){
+      $add_socket[8] = "";
+    }elseif ($_POST['dimmable'] == "true") {
+      $add_socket[8] = "0";
+    }
     $row = combined_string($add_socket);
     $csv = fopen("codes.csv", "a") or die("Unable to open file!");
     fwrite($csv, $row);
@@ -147,6 +156,9 @@
     }
   }
 
+function change_dimlevel(){
+
+}
   // Call edit or add function
   if (isset($_POST['edit'])){
     update_csv();
