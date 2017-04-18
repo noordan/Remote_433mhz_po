@@ -32,6 +32,7 @@
           $signal['on_time'] = $data[4];
           $signal['off_time'] = $data[5];
           $signal['status'] = $data[6];
+          $signal['dimmable'] = $data[7];
           array_push($signals, $signal);
         }
         fclose($handle);
@@ -71,6 +72,7 @@
         $signal['on_time'] = $_POST['on_time'];
         $signal['off_time'] = $_POST['off_time'];
         $signal['status'] = $signal['status'];
+        $signal['dimmable'] = $signal['dimmable'];
       }
       $row = combined_string($signal);
       fwrite($csv, $row);
@@ -88,6 +90,7 @@
     $add_socket[4] = $_POST['on_time'];
     $add_socket[5] = $_POST['off_time'];
     $add_socket[6] = "off";
+    $add_socket[7] = $_POST['dimmable'];
     $row = combined_string($add_socket);
     $csv = fopen("codes.csv", "a") or die("Unable to open file!");
     fwrite($csv, $row);

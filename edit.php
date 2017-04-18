@@ -63,7 +63,8 @@
                 echo '<b>Place:</b> ' . $signal['place']. ' ';
                 echo '<b>On time:</b> ' . $signal['on_time']. ' ';
                 echo '<b>Off time:</b> ' . $signal['off_time'] .' ';
-                echo '<b>Status:</b> ' . $signal['status']. ' <br>';
+                echo '<b>Status:</b> ' . $signal['status'];
+                echo '<b>Status:</b> ' . $signal['dimmable'] . ' <br>';
                 echo '<div align="center">
                   <a href="?code='. $signal['on_code'] . '&name=' .  $signal['name'] . '&status=on"><button  class="btn btn-md btn-custom" aria-haspopup="true" aria-expanded="false" style="border-color:#B2B2B2;width:49.5%;margin-top:10px;" type="submit">Turn on ' . $signal['place'] . '</button></a>
                   <a href="?code='. $signal['off_code'] . '&name=' . $signal['name'] . '&status=off"><button  class="btn btn-md btn-custom" aria-haspopup="true" aria-expanded="false" style="border-color:#B2B2B2;width:49.5%;margin-top:10px;" type="submit">Turn off ' . $signal['place'] . '</button></a>
@@ -92,6 +93,7 @@
                 echo '<b>Place: </b><input type="text" class="form-control" name="place" Placeholder="Kitchen"> ';
                 echo '<b>On time: </b><input type="text" class="form-control" name="on_time" Placeholder="10:05"> ';
                 echo '<b>Off time: </b><input type="text" class="form-control" name="off_time" Placeholder="20:35"> ';
+                echo '<b>Is dimmable: </b><input type="text" class="form-control" name="dimmable" Placeholder="No"> ';
               echo '</div>
                   <input class="btn btn-custom btn-lg btn-block" type="submit" formaction="functions.php" value="Submit" style="margin-top:10px;">
                 </form>';
