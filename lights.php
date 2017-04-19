@@ -85,6 +85,16 @@
           <a href="./settings.php"><button class="btn btn-custom btn-lg btn-block" style="border-color:#B2B2B2;" type="submit"> Settings </button></a>
         </div>
       </div>
+
+      <!-- Simple test, two columns and color code, se picrture in phone
+      <section class="panel panel-success">
+        <header class="panel-heading">
+         ...
+        </header>
+        <div class="panel-footer">
+        </div>
+      </section>
+      -->
     </div>
   </body>
 </html>
