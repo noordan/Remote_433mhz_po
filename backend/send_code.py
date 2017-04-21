@@ -62,7 +62,9 @@ def update_status(codes_csv, name, status):
 
 
 if __name__ == "__main__":
-    import sys
+    import sys, os
+    # TODO: Fetch parent folder from path
+    #path = os.path.dirname(os.path.realpath(__file__))
     codes_csv = '/var/www/html/Remote_po_gui/codes.csv' # Csv file in absolute search path
     # scheduled turn on and turn off
     if (sys.argv[1] == "cron"):

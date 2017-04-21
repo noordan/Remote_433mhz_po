@@ -1,6 +1,9 @@
 <?php // TODO: Implement support for turn on/off all lights with one click
       //       Implement some logging solutions
       //       Add sun up/down feature
+      //
+      // SETTINGS, implement default path in python backend, add 433mhz git to backend, implement settings for default path
+      // NEXASUPPORT, complete dimmer gui
       ini_set("session.cookie_secure", 1);
       ini_set( 'session.cookie_httponly', 1 );
       $configs = include('config.php');
