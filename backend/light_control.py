@@ -1,11 +1,23 @@
 #!/usr/bin/python3
 import socket
+def get_ip():
+    import re, subprocess
+    # Some usual interface name
+    eth_interfaces = ["eth0", "ens160", "eth1"]
+    for eth_interface in eth_interfaces:
+        grep_ip = "/sbin/ifconfig " + eth_interface + "| grep 'inet ' | cut -d\\t -f2 | cut -d\: -f2 | awk '{print $1}' 2> /dev/null"
+        proc = subprocess.Popen([grep_ip], stdout=subprocess.PIPE, shell=True)
+        (ip_address, err) = proc.communicate()
+        ip_address = ip_address.rstrip().decode('ascii')
+        if re.match("\d{1,3}.\d{1,3}.\d{1,3}.\d{1,3}", ip_address):
+            return ip_address
 def close(clientsocket):
     clientsocket.close()
 def bind():
     # create a socket object and bind the port
+    ip_address = get_ip()
     serversocket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-    serversocket.bind(('192.168.5.29', 9999))
+    serversocket.bind((ip_address, 9999))
     # queue up to 5 requests
     serversocket.listen(5)
     return serversocket
@@ -44,7 +56,7 @@ if __name__ == "__main__":
                        for x in range(3):
                         print(nexa)
                         send_nexa(nexa)
-                    else: 
+                    else:
                        for x in range(3):
                         send_code(code)
                     r = "Message recived"
