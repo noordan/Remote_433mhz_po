@@ -6,7 +6,9 @@ def get_suntime():
 def get_ip():
     # Get config file
     import re
-    with open('/var/www/html/Remote_po_gui/config.php', 'r') as f:
+    path = os.path.dirname(os.path.realpath(__file__))
+    config = path + '/../config.php'
+    with open(config, 'r') as f:
         for line in f:
             # Scan for ip and port
             if re.search('\'ip\' => \'(.*)\'', line):
@@ -64,8 +66,8 @@ def update_status(codes_csv, name, status):
 if __name__ == "__main__":
     import sys, os
     # TODO: Fetch parent folder from path
-    #path = os.path.dirname(os.path.realpath(__file__))
-    codes_csv = '/var/www/html/Remote_po_gui/codes.csv' # Csv file in absolute search path
+    path = os.path.dirname(os.path.realpath(__file__))
+    codes_csv = path + '/../codes.csv' # Csv file in absolute search path
     # scheduled turn on and turn off
     if (sys.argv[1] == "cron"):
         # Get current time and fetch information from csv file
