@@ -2,32 +2,27 @@
 import socket
 def get_suntime():
     pass
-
-def get_ip():
-    # Get config file
-    import re
+def parse_config():
+    import re, os
+    # open config file from parent folder
+    config = {}
     path = os.path.dirname(os.path.realpath(__file__))
-    config = path + '/../config.php'
-    with open(config, 'r') as f:
+    config_file = path + '/../config.php'
+    with open(config_file, 'r') as f:
         for line in f:
-            # Scan for ip and port
-            if re.search('\'ip\' => \'(.*)\'', line):
-                ip = re.search('\'ip\' => \'(.*)\'', line).group(1)
-            elif re.search('\'port\' => \'(.*)\'', line):
-                port = int(re.search('\'port\' => \'(.*)\'', line).group(1))
-    # Return socket settings
-    return ip, port
-
+            # Scan for config settings
+            if re.search('\'(.+)\' => \'(.*)\'', line):
+                config[re.search('\'(.+)\' => \'(.*)\'', line).group(1)] = re.search('\'(.+)\' => \'(.*)\'', line).group(2)
+    return config    
+# send message to light_control.py
 def send(connection, msg):
     connection.sendall(msg.encode('ascii'))
 
-def connect():
-    # get ip
-    ip, port = get_ip()
+def connect(config):
     # create a socket object and connect to server
     connection = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-    connection.connect((ip, port))
-
+    connection.connect((config['ip'], int(config['port'])))
+    # Get a recive message if connected
     recive = connection.recv(1024)
     return connection, recive
 
@@ -65,9 +60,10 @@ def update_status(codes_csv, name, status):
 
 if __name__ == "__main__":
     import sys, os
-    # TODO: Fetch parent folder from path
-    path = os.path.dirname(os.path.realpath(__file__))
-    codes_csv = path + '/../codes.csv' # Csv file in absolute search path
+    # Fetch information from config file
+    config = {}
+    config = parse_config() 
+    codes_csv = config['default_path'] + '/codes.csv' # Csv file in absolute search path
     # scheduled turn on and turn off
     if (sys.argv[1] == "cron"):
         # Get current time and fetch information from csv file
@@ -80,7 +76,7 @@ if __name__ == "__main__":
             on_time = str(s['on_time']).split(';')
             if time in on_time:
                 msg = str(s['on'])
-                connection, recive = connect()
+                connection, recive = connect(config)
                 if recive.decode('ascii'):
                     send(connection, msg) #Send status
                     recive = connection.recv(1024) # Message recived
@@ -90,7 +86,7 @@ if __name__ == "__main__":
             off_time = str(s['off_time']).split(';')
             if time in off_time:
                 msg = str(s['off'])
-                connection, recive = connect()
+                connection, recive = connect(config)
                 if recive.decode('ascii'):
                     send(connection, msg) #Send status
                     recive = connection.recv(1024) # Message recived
@@ -100,7 +96,7 @@ if __name__ == "__main__":
     else:
         try:
             msg = sys.argv[1]
-            connection, recive = connect()
+            connection, recive = connect(config)
             if recive.decode('ascii'):
                 send(connection, msg) # Send status
                 recive = connection.recv(1024) # Message recived
