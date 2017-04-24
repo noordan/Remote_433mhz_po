@@ -21,7 +21,6 @@
     <link rel="stylesheet" href="./custom.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <!-- Reload page if a setting has been done -->
     <script>
       function getParam(name, url) {
         if (!url) {
@@ -33,12 +32,14 @@
         }
         return results[1] || 0;
       }
+
       $(document).ready(function(){
-        var success=getParam("scheduling");
-        if(success!=0){
-          setTimeout(function() { // redirect to settings.php
-            window.location.replace("/settings.php").delay(5100);
-          }, 0300);
+        var updated=getParam("updated");
+        var scheduling=getParam("scheduling");
+        if(updated!=0 || scheduling!=0){
+          setTimeout(function() { //rredirect to lights.php
+            window.location.replace("/settings.php").delay(0100);
+          }, 1000);
         }
       });
     </script>
@@ -51,16 +52,14 @@
         <li class="active">Settings</li>
         <li><a href="login/logout.php">Log out</a></li>
       </ol>
-      <div class="panel panel-default">
           <?php
-            // include settings
-            include 'settings/scheduling.php';
-            include 'settings/login_settings.php';
-            include 'settings/raspberrypi.php';
-          ?>
-      </div>
-      <?php
-
+            // include settings files
+            $inclussions = array('scheduling', 'login_settings', 'raspberrypi', 'default_path');
+            foreach ($inclussions as $inc) {
+              echo '<div class="panel panel-default">';
+                include 'settings/' . $inc . '.php';
+              echo '</div>';
+            }
       ?>
     </div>
   </body>

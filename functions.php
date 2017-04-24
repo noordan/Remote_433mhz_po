@@ -146,8 +146,9 @@
 
   function update_config($configs){
     file_put_contents('config.php', '<?php return ' . var_export($configs, true) . ';?>');
+    header('location: https://' . $_SERVER['HTTP_HOST'] . '/settings.php?updated=true');
   }
-  // Call edit or add function
+  // Call edit or add socket function
   if (isset($_POST['edit'])){
     update_csv();
     header('location: https://' . $_SERVER['HTTP_HOST'] . '/edit.php');
@@ -155,5 +156,6 @@
     add_remote_outlet();
     header('location: https://' . $_SERVER['HTTP_HOST'] . '/edit.php');
   }
+
 
 ?>

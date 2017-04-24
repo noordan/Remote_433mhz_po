@@ -12,7 +12,6 @@
         $ip = get_client_ip_env();
         session_start();
         if (preg_match('/192\.168\.0\..{1,3}/', $ip) || isset($_SESSION['username'])){
-
         } else {
           require "login/login_header.php";
         }
@@ -39,7 +38,6 @@
         }
         return results[1] || 0;
       }
-
       $(document).ready(function(){
         var success=getParam("code");
         if(success!=0){
@@ -75,7 +73,6 @@
             // Run codes for remote sockets
             if (isset($_GET['code'])) {
               exec('python3 backend/send_code.py ' . $_GET['code'] . ' > /dev/null &');
-
               // Call function for update status
               status($_GET['name'], $_GET['status']);
             }
