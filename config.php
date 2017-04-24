@@ -2,7 +2,7 @@
   'version' => '0.1',
   'username' => 'pi',
   'pass' => 'password',
-  'login_enabled' => 'False',
+  'login_enabled' => 'True',
   'default_path' => '/var/www/html/Remote_433mhz_po_gui',
   'socket_info' => 
   array (
