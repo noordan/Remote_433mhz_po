@@ -16,7 +16,6 @@ def get_ip():
     import re, subprocess
     # Some usual interface name
     eth_interfaces = ["eth0", "eth1", "ens160"]
-
     # test the interfaces after an ip
     for eth_interface in eth_interfaces:
         grep_ip = "/sbin/ifconfig " + eth_interface + "| grep 'inet ' | cut -d\\t -f2 | cut -d\: -f2 | awk '{print $1}' 2> /dev/null"
@@ -48,9 +47,9 @@ def send_nexa(nexa, config):
 
 if __name__ == "__main__":
     import re, subprocess
-    serversocket = bind(config)
     config = {}
-    config = parse_config
+    config = parse_config()
+    serversocket = bind(config)
     while True:
         # establish a connection
         clientsocket,addr = serversocket.accept()
