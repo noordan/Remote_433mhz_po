@@ -1,7 +1,11 @@
 #!/usr/bin/python3           # This is client.py file
 import socket
 def get_suntime():
-    pass
+    import urllib.request, json
+    url1 = "https://api.sunrise-sunset.org/json?lat=58.386013&lng=13.439328&date=today"
+    with urllib.request.urlopen(url1) as url:
+        data = json.loads(url.read().decode())
+        print(data['results']['sunrise'], data['results']['sunset'])
 def parse_config():
     import re, os
     # open config file from parent folder
@@ -60,6 +64,7 @@ def update_status(codes_csv, name, status):
 
 if __name__ == "__main__":
     import sys, os
+    get_suntime()
     # Fetch information from config file
     config = {}
     config = parse_config() 
