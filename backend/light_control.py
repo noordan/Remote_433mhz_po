@@ -37,7 +37,7 @@ def bind(config):
     return serversocket
 def send_code(code, config):
     #run RPi_utils to transmit 433mhz signal
-    cmd = "sudo -u pi " + config['default_path'] + "/433Utils/RPi_utils/codesend " + code
+    cmd = "sudo -u pi " + config['default_path'] + "/backend/433Utils/RPi_utils/codesend " + code
     process = subprocess.Popen([cmd], shell=True, stdout=subprocess.PIPE)
     out, err = process.communicate()
 def send_nexa(nexa, config):
