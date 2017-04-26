@@ -1,8 +1,6 @@
 <?php // TODO: Implement support for turn on/off all lights with one click
       //       Implement some logging solutions
-      //       Add sun up/down feature
-      //
-      // SETTINGS, NEW BACKEND/light_control NEEDS TESTING, 433Utils IMPLEMENTED TO BACKEND
+      // SUNSETTINGS, not only if socket has that setting, for sunrise/sunset +/- hours
       // NEXASUPPORT, complete dimmer gui
       ini_set("session.cookie_secure", 1);
       ini_set( 'session.cookie_httponly', 1 );
