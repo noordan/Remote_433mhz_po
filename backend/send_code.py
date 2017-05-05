@@ -45,7 +45,7 @@ def parse_config():
                 config[re.search('\'(.+)\' => \'(.*)\'', line).group(1)] = re.search('\'(.+)\' => \'(.*)\'', line).group(2)
     return config
 # send message to light_control.py
-def send(msg, config, codes_csv):
+def send(msg, config, codes_csv, status):
     # Connect to light_control
     connection, recive = connect(config)
     # Connection established
@@ -56,7 +56,8 @@ def send(msg, config, codes_csv):
         recive = connection.recv(1024)
         connection.close()
         # Update status in csv file
-        update_status(codes_csv, s['name'], "on")
+        if status != "web":
+            update_status(codes_csv, s['name'], status)
 
 def connect(config):
     # create a socket object and connect to server
@@ -118,24 +119,24 @@ if __name__ == "__main__":
             off_time = str(s['off_time']).split(';')
             if time in on_time:
                 msg = str(s['on'])
-                send(msg, config, codes_csv) #Send on code
+                send(msg, config, codes_csv, "on") #Send on code
             elif "sunrise" in on_time or "sunset" in on_time:
                 if get_suntime(config, hour, minute):
                     msg = str(s['on'])
-                    send(msg, config, codes_csv) #Send on code
+                    send(msg, config, codes_csv, "on") #Send on code
             # Turn off socket
-            elif time in off_time:
+            if time in off_time:
                 msg = str(s['off'])
-                send(msg, config, codes_csv) #Send off code
+                send(msg, config, codes_csv, "off") #Send off code
             elif "sunrise" in off_time or "sunset" in off_time:
                 if get_suntime(config, hour, minute):
                     msg = str(s['on'])
-                    send(msg, config, codes_csv) #Send off code
+                    send(msg, config, codes_csv, "off") #Send off code
     # Code from the web interface or via cli argument
     else:
         try:
             msg = sys.argv[1]
-            send(msg, config, codes_csv)
+            send(msg, config, codes_csv, "web")
         except Exception as e:
             #print(e)           # debug
             pass

@@ -2,6 +2,7 @@
       //       Implement some logging solutions
       // SUNSETTINGS, not only if socket has that setting, for sunrise/sunset +/- hours
       // NEXASUPPORT, complete dimmer gui
+      // remove uunnessesey things in backend/433utils
       ini_set("session.cookie_secure", 1);
       ini_set( 'session.cookie_httponly', 1 );
       $configs = include('config.php');

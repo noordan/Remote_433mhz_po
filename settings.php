@@ -54,7 +54,7 @@
       </ol>
           <?php
             // include settings files
-            $inclussions = array('scheduling', 'login_settings', 'raspberrypi', 'default_path');
+            $inclussions = array('scheduling', 'login_settings', 'raspberrypi', 'default_path', 'locale');
             foreach ($inclussions as $inc) {
               echo '<div class="panel panel-default">';
                 include 'settings/' . $inc . '.php';

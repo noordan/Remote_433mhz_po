@@ -16,7 +16,6 @@
     </form>';
 
   if (isset($_POST['update_path'])) {
-    // Change raspberry i settings in configuration file and save it again
     // Auto refresh is not implemented
     $configs['default_path'] = $_POST['path'];
     update_config($configs);
