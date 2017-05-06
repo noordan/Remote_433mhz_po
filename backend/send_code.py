@@ -33,8 +33,6 @@ def get_suntime(config, hour, minute, sun_addition):
             return True
         else:
             return False
-def suntime_adder():
-    pass
 def parse_config():
     import re, os
     # open config file from parent folder
@@ -107,7 +105,6 @@ if __name__ == "__main__":
     # Fetch information from config file
     config = {}
     config = parse_config()
-
     codes_csv = config['default_path'] + '/codes.csv' # Csv file in absolute search path
     # scheduled turn on and turn off via cronjob
     if (sys.argv[1] == "cron"):
