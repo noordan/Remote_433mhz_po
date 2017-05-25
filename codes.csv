@@ -1,6 +1,6 @@
 name,on,off,place,on_time,off_time,status
-Group1,1381717,1381716,Kitchen,sunset-1;sunrise-2,sunrise+3;sunset+2,on
-Group2,1394005,1394004,Bedroom,20:00,08:00;22:20,off
-Group3,4527445,4527444,Hall,05:50;20:00,08:00;22:30,on
-Group4,1397077,1397076,Livingroom,20:00,22:30,on
-Group5,4539733,4539732,Lightbox,20:00,sunrise+2;sunset+2,off
+Group1,1381717,1381716,Kitchen,sunrise-1;sunset-2,sunset+2,on
+Group2,1394005,1394004,Bedroom,20:00,08:00;22:30,off
+Group3,4527445,4527444,Hall,sunrise;20:00,22:35,off
+Group4,1397077,1397076,Livingroom,sunset-2,sunset+2,off
+Group5,4539733,4539732,Lightbox,sunset-2,sunset+2,off

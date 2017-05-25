@@ -11,6 +11,7 @@ def get_suntime(config, hour, minute, sun_addition):
         sunrise = datetime.strftime(datetime.strptime(data['results']['sunrise'], "%I:%M:%S %p") + timedelta(hours=int(time_differ)), "%H:%M")
         # Convert sunset to 24 hour clock
         sunset = datetime.strftime(datetime.strptime(data['results']['sunset'], "%I:%M:%S %p") + timedelta(hours=int(time_differ)), "%H:%M")
+        sunrise = "09:11"
     sunrise = sunrise.split(':')
     sunset = sunset.split(':')
     # Compare current time with sunrise
@@ -133,12 +134,12 @@ if __name__ == "__main__":
                             msg = str(s['on'])
                             send(msg, config, codes_csv, "on") #Send on code
             # Turn off socket
-            if time in on_time:
+            if time in off_time:
                 msg = str(s['off'])
                 send(msg, config, codes_csv, "off") #Send on code
             else:
-                #if "sunrise" in off_time:
                 if re.search('sunrise', str(off_time)) or re.search('sunset', str(off_time)):
+                    #print(s['off_time'])
                     for off in off_time:
                         # Check if +/-h on sunrise/sunset in offtime
                         if re.search('(\+\d|-\d)', off):
@@ -146,7 +147,7 @@ if __name__ == "__main__":
                         else:
                             sun_addition = 0
                         if get_suntime(config, hour, minute, sun_addition):
-                            msg = str(s['on'])
+                            msg = str(s['off'])
                             send(msg, config, codes_csv, "off") #Send on code
     # Code from the web interface or via cli argument
     else:
