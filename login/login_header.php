@@ -5,7 +5,7 @@
   $exploded_uri = explode('/', $uri); //$exploded_uri == array('example.com','sub')
   $domain_name = $exploded_uri[0]; //$domain_name = 'example.com'
 
-  include '../functions.php';
+  include_once '../functions.php';
   $ip = get_client_ip_env();
   if (preg_match('/192\.168\.0\..{1,3}/', $ip)){
     header('location: https://' . $_SERVER['HTTP_HOST']);

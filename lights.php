@@ -9,9 +9,10 @@
       include 'functions.php';
       if ($configs['login_enabled'] == "True"){
         $ip = get_client_ip_env();
-        session_start();
+ //       session_start();
         if (preg_match('/192\.168\.0\..{1,3}/', $ip) || isset($_SESSION['username'])){
-        } else {
+	  session_start();
+	} else {
           require "login/login_header.php";
         }
       }

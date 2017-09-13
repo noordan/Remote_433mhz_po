@@ -8,6 +8,8 @@ ini_set('display_errors', 'On');
 
 define('DOMAIN_FQDN', 'lukasnord.se');
 define('LDAP_SERVER', '192.168.0.125');
+#define('DOMAIN_FQDN', 'lnord.se');
+#define('LDAP_SERVER', '192.168.0.106');
 
 if (isset($_POST['submit']))
 {
@@ -49,7 +51,8 @@ if (isset($_POST['submit']))
           //    "OU=Users,OU=Employees,DC=". join(',DC=', explode('.', DOMAIN_FQDN)));
 
             $base_dn = array("CN=Users,DC=". join(',DC=', explode('.', DOMAIN_FQDN)),
-                "OU=Employees,DC=". join(',DC=', explode('.', DOMAIN_FQDN)));
+		    "OU=Employees,DC=". join(',DC=', explode('.', DOMAIN_FQDN)));
+		#
                 //change OU to "OU=EMployees" to log in with EMployees
                 //create a function for loop thru all OU
 
@@ -95,7 +98,7 @@ if (isset($_POST['submit']))
     }
 
     elseif (!isset($err)) {
-      session_start();
+//      session_start();
       $err = 'Unable to login: '. ldap_error($conn);
       $_SESSION['err'] = $err;
       header('Location: ./login.php');

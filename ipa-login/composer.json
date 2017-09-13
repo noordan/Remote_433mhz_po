@@ -1,0 +1,29 @@
+{
+    "name": "gnumoksha/php-freeipa",
+    "type": "library",
+    "description": "A PHP library for connect and use some features of the freeIPA / Red Hat Identity Management",
+    "keywords": [ "freeipa", "rh idm" ],
+    "homepage": "https://github.com/gnumoksha/php-freeipa",
+    "license": [ "LGPL-3.0+" ],
+    "authors": [
+        {
+            "name": "Tobias Sette",
+            "email": "contato@tobias.ws",
+            "homepage": "http://tobias.ws",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php": ">=5.4.0",
+        "ext-curl": "*"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "4.8.*",
+        "phpdocumentor/phpdocumentor": "2.*"
+    },
+    "autoload": {
+        "psr-4": {
+            "FreeIPA\\": "src/"
+        }
+    }
+}
